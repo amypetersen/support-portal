@@ -1,66 +1,48 @@
 <style>
 @import "compass/css3";
 
-@import url(http://fonts.googleapis.com/css?family=Exo:400,500,700,700italic);
-
-* {
-   box-sizing:border-box; 
-}
-
-html,
-body {
-    width:100%;
-    height:100%;
-}
-
-body {
-    margin:1.25em .75em;
-    background:url(http://subtlepatterns.com/patterns/black-Linen.png);
-    font: 1.4em 'Exo', sans-serif;
-}
-
-nav[role="select"] {
+nav[role="full-horizontal"] {
     width: 100%;
-    position:relative;
-    color:#000;
-    
-    > select {
-      display:none;  
-    }
     
     ul {
       width:100%;
       list-style:none;
     
-      > li {
-        float:left;
-        padding:.55em .45em;
-        width:19%;
-        font-size:1.2em;
-        background-color: hsla(304, 35%, 51%, .5);
-        text-align:center;
-        transition-duration: .15s;
+      > li { 
+        transition-duration: .3s;
         transition-timing-function: ease-in-out;
-        transition-property: box-shadow, background, color, text-align, padding;
-        cursor: pointer;
+        transition-property: background, color, padding, border-radius;
+        ;
+    
+        &:after {
+          position:absolute;
+          z-index:-1;
+          content:"";
+          right:0;
+          border-radius:50%;
+          box-shadow:
+            1em 1em 0 2em rgba(255, 255, 255, .5)
+          ;
+        }
+
+        &:last-child:after {
+           box-shadow:none;
+        }
     
         &:hover {
-            background-color: hsla(304, 35%, 51%, .3);
-            color:#fff;
-            text-align:left;
-            padding-left:.75em;
-            box-shadow:
-              0 0 0 .25em rgba(0, 0, 0, .3),
-              0 0 0 .5em rgba(0, 0, 0, .3),
-              0 0 0 .75em rgba(0, 0, 0, .3),
-              inset 0 0 0 .25em rgba(0, 0, 0, .3)
-            ;           
+            background-color:#91878E;
+            padding-left:3em;
+    
+            > a {
+              color:#fff;
+            }
         }
     
         > a {
-          color:inherit;
+          color:#333;
           text-decoration:none;
-          transition:inherit;
+          font-size: 1.4em;
+          transition:color .3s ease-in-out;
         }
       }
     }
@@ -69,52 +51,286 @@ nav[role="select"] {
 /* small screens */
 @media screen and (max-width: 44em) {
   body {
-   margin:1em 0;     
+    margin:1.5em 0;      
   }
     
-  nav[role="select"] {
+  nav[role="full-horizontal"] {
     ul {
-      display:none;
+      padding:0 .5em;    
     }
-
-    &:after {
-        position:absolute;
-        z-index:-1;
-        content:"Menu";
-        right:0;
-        bottom:-1.75em;
-        background:hsla(304, 35%, 51%, .4);
-        padding:.15em .55em;
-    }
-
-    select {
-      display:block;
-      user-select:none;
-      cursor: pointer;
+    
+    ul > li {
       width:100%;
-      padding:.55em .45em;
-      border:none;
-      background-color: hsla(304, 35%, 51%, .25);
-      font: 1.2em 'Exo', sans-serif;
+      padding:.45em .25em;
+      margin:0 0 .55em 0;
+    
+      &:after {
+        box-shadow:none;  
+      }
     }
   }
 }
+
+
+
+
+.flex-container {
+  padding: 0;
+  margin: 0px 0px 100px 0px;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  background-color: #F5F5F5;
+  padding: 10px;
+  margin: 0px 20px 40px;
+  border-radius: 10px;
+  width: 165px;
+  text-align: center;
+} 
+.flex-item a {
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+.flex-item h2 {
+  margin: 0;
+}
+
+.flex-img {
+  height: 38px;
+  margin: 10px 0px;
+}
+
+.direct-article {
+  list-style: none; 
+  text-align: center;
+}
+.direct-article a {
+  font-weight: normal;
+  font-size: 12px;
+  text-align: center;
+}
+.direct-article-left {
+  list-style: none; 
+  text-align: left;
+}
+.direct-article-left a {
+  font-weight: normal;
+  font-size: 12px;
+  text-align: left;
+}
+.collapsible-list {
+  text-align: center;
+}
+.collapsible-list a {
+  font-size: 14px;
+}
+
+hr {
+  background-color: #60B7C0;
+  color: #60B7C0;
+  border: none;
+  height: 2px;
+  margin-top: -1em;
+  margin-left: 0px;
+}
+.left-hr {
+  margin-right: 30px;
+}
+h1 {
+  text-align: center;
+}
+h3 {
+  color: #60B7C0;
+}
+h4 {
+  text-align: center;
+}
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 20px 0px;
+  margin-top: 50px
+}
+table tr {
+  width: 50%
+}
 </style>
 
-<nav role="select">
-    <ul>
-        <li><a href="#">Stream</a></li>
-        <li><a href="#">Lab</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-    
-    <select onchange="if (this.value) window.location.href = this.value;">
-        <option value="#">Stream</option>
-        <option value="#">Lab</option>
-        <option value="#">Projects</option>
-        <option value="#">About</option>
-        <option value="#">Contact</option>
-    </select>
+  <h1>RTLS Connected Partner KB</h1>
+  <h4>Access to software requires a software maintenance agreement</h4>
+<nav role="full-horizontal">
+  <ul class="flex-container">
+  <li class="flex-item" style="border-radius: 10px;">
+     <a href="/display/4/kb/browse/cat.aspx?cid=2436&kb=1&L1cid=2436&level=2&r=0.7031153&tab=browse">
+       <img class="flex-img" src="/pf/12/webfiles/icons/mv_icon.jpg"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2436&kb=1&L1cid=2436&level=2&r=0.7031153&tab=browse">MobileView</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8389">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8393">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8390">Release Notes</a></p>
+  </li>
+  
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2521&kb=1&L1cid=2521&level=2&r=0.01367033&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/EX3210.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2521&kb=1&L1cid=2521&level=2&r=0.01367033&tab=browse">Exciters</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=9511">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=2197">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=7445">Release Notes</a></p> 
+  </li>
+  
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2433&kb=1&L1cid=2433&level=2&r=0.02878779&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/A_engine _icon.jpg"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2433&kb=1&L1cid=2433&level=2&r=0.02878779&tab=browse">Location Engine (ALE)</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8493">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8362">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8360">Release Notes</a></p> 
+  </li>
+  
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2898&kb=1&L1cid=2898&level=2&r=0.490622&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/hardware_manager.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2898&kb=1&L1cid=2898&level=2&r=0.490622&tab=browse">Hardware Manager</a></h2>
+    <p class="direct-article">(includes Tag Manager)</p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=7815">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=2872">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8463">Release Notes</a></p> 
+  </li>
+  
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2963&kb=1&L1cid=2963&level=2&r=0.220185&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/hardware_manager.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2963&kb=1&L1cid=2963&level=2&r=0.220185&tab=browse">TED</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8437">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8161">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8463">Release Notes</a></p> 
+  </li> 
+  
+  <li class="flex-item"><a href="https://stanleyhealthcare.force.com/NewTicket" target="_blank">
+      <img class="flex-img" src="/pf/12/webfiles/icons/tickets.png"></a><br>
+    <p class="direct-article"><a href="https://stanleyhealthcare.force.com/NewTicket" target="_blank">Submit a Ticket</a></p>
+      <p class="direct-article"><a href="https://stanleyhealthcare.force.com/Forum?roomId=09a20000000MVuGAAW#!/feedtype=RECENT_REPLY&criteria=ALLQUESTIONS" target="_blank">Join a Discussion</a></p>
+      <p class="direct-article"><a href="http://stanleyhealthcare.netexam.com/" target="_blank">NetExam Training & Certifications</a></p>
+  </li> 
+</ul>
+
+<script language="javascript"> 
+function toggle() {
+	var ele = document.getElementById("toggleText");
+	var text = document.getElementById("displayText");
+	if(ele.style.display == "block") {
+    		ele.style.display = "none";
+		text.innerHTML = "+ Show More Products";
+  	}
+	else {
+		ele.style.display = "block";
+		text.innerHTML = "- Show Fewer Products";
+text.style.fontWeight = 'bold';
+	}
+} 
+</script>
+
+
+<h1 class="collapsible-list"><a id="displayText" href="javascript:toggle();"><b>+ Show More Products</b></a></h1>
+<div id="toggleText" style="display: none">
+<blockquote>
+
+<ul class="flex-container">
+    <li class="flex-item">
+     <a href="/display/4/kb/browse/cat.aspx?cid=2318&kb=1&L1cid=2318&level=2&r=0.4457099&tab=browse">
+       <img class="flex-img" src="/pf/12/webfiles/icons/mva_icon.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2318&kb=1&L1cid=2318&level=2&r=0.4457099&tab=browse">Asset Management</a></h2>
+      <p class="direct-article"><a href="">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=6101">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Release Notes</a></p>
+  </li>
+  
+  <li class="flex-item">
+     <a href="/display/4/kb/browse/cat.aspx?cid=2320&kb=1&L1cid=2320&level=2&r=0.4522371&tab=browse">
+       <img class="flex-img" src="/pf/12/webfiles/icons/mva_icon.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2320&kb=1&L1cid=2320&level=2&r=0.4522371&tab=browse">Environmental Monitoring</a></h2>
+      <p class="direct-article"><a href="">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Release Notes</a></p>
+  </li>
+  
+  <li class="flex-item">
+     <a href="/display/4/kb/browse/cat.aspx?cid=2876&kb=1&L1cid=2876&level=2&r=0.0399788&tab=browse">
+       <img class="flex-img" src="/pf/12/webfiles/icons/mva_icon.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2876&kb=1&L1cid=2876&level=2&r=0.0399788&tab=browse">MobileView Analytics</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/browse/cat.aspx?cid=2878&kb=1&L1cid=2876&L2cid=2878&level=3&r=0.2011698&tab=browse">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8304">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8289">Release Notes</a></p>
+  </li>
+  
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2527&kb=1&L1cid=2527&level=2&r=0.7987061&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/integrations_puzzle_icon.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2527&kb=1&L1cid=2527&level=2&r=0.7987061&tab=browse">MobileView Integrations</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/browse/cat.aspx?cid=2572&kb=1&L1cid=2527&L2cid=2572&level=3&r=0.6166514&tab=browse">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/browse/cat.aspx?cid=2573&kb=1&L1cid=2527&L2cid=2573&level=3&r=0.559346&tab=browse">Deployment Guides</a></p>
+      <p class="direct-article"><a href="/display/4/kb/browse/cat.aspx?cid=2573&kb=1&L1cid=2527&L2cid=2573&level=3&r=0.559346&tab=browse">Release Notes</a></p> 
+  </li>
+</ul>
+
+<ul class="flex-container">
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2332&kb=1&L1cid=2332&level=2&r=0.976526&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/hardware_manager.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2332&kb=1&L1cid=2332&level=2&r=0.976526&tab=browse">Nurse Call RTLS Integration</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Release Notes</a></p> 
+  </li> 
+  
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2319&kb=1&L1cid=2319&level=2&r=0.423929&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/hardware_manager.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2319&kb=1&L1cid=2319&level=2&r=0.423929&tab=browse">Patient Flow</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Release Notes</a></p> 
+  </li> 
+  
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2504&kb=1&L1cid=2504&level=2&r=0.2597662&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/hardware_manager.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2504&kb=1&L1cid=2504&level=2&r=0.2597662&tab=browse">Tags</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=7815">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=2872">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=8463">Release Notes</a></p> 
+  </li> 
+  
+  <li class="flex-item"><a href="/display/4/kb/browse/cat.aspx?cid=2845&kb=1&L1cid=2845&level=2&r=0.08080482&tab=browse">
+    <img class="flex-img" src="/pf/12/webfiles/icons/hardware_manager.png"></a><br>
+    <h2><a href="/display/4/kb/browse/cat.aspx?cid=2845&kb=1&L1cid=2845&level=2&r=0.08080482&tab=browse">Wireless LAN Vendors</a></h2>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Latest Version</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Deployment Guide</a></p>
+      <p class="direct-article"><a href="/display/4/kb/article.aspx?aid=0000">Release Notes</a></p> 
+  </li>
+</ul>
+</blockquote>
+</div>
 </nav>
+
+
+<table>
+  <tr>
+    <td>		<h3>Recommended Articles</h3><hr class="left-hr">	</td>
+    <td><h3>Featured Video</h3><hr></td>
+		  </tr>
+  <tr>
+    <td>
+      <p class="direct-article-left"><a href="/display/4/kb/article.aspx?aid=1100">Product Versions Compatibility Matrix Reference Guide (1100)</a></p>
+      <p class="direct-article-left"><a class="table-link" href="/display/4/kb/article.aspx?aid=2389">Software/Firmware Release Update (2389)</a></p>
+      <p class="direct-article-left"><a href="/display/4/kb/article.aspx?aid=2150">Critical Known Issues (2150)</a></p>
+    </td>
+    <td rowspan="3"><iframe width="210" height="115" src="https://www.youtube.com/embed/MnFjwUd7l9s" frameborder="0" allowfullscreen></iframe>
+      <br><span style="font-size:12px; color:black;">For more videos, visit our <a style="font-size: 12px;" href="http://www.youtube.com/user/stanleyhealthcare" target="_blank">YouTube</a> page.</a></span>
+    </td> 
+  </tr>
+</table>
